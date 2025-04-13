@@ -1,0 +1,141 @@
+Docker is a platform for developing, shipping, and running applications inside lightweight containers.
+These containers package up an application with all the parts it needs, such as libraries and other dependencies,
+and deploy it as one package. Below is a detailed list of Docker commands and best practices.
+
+1. Installing Docker
+   - On Linux (Ubuntu/Debian-based):
+     sudo apt-get update
+     sudo apt-get install docker.io
+     sudo systemctl start docker
+     sudo systemctl enable docker
+   - On Windows or macOS, download Docker Desktop from the official Docker website.
+
+2. docker version
+   Displays the installed Docker version information, including client and server details.
+
+3. docker info
+   Shows general information about the Docker installation, such as the number of containers, images, and storage driver details.
+
+4. docker pull <image-name>
+   Downloads the latest version of the specified image from Docker Hub (or another container registry).
+   Example: docker pull ubuntu
+
+5. docker images
+   Lists all the images stored locally on the system.
+   Shows REPOSITORY, TAG, IMAGE ID, CREATED, and SIZE.
+
+6. docker run <image-name>
+   Creates and starts a container from the specified image.
+   For example, docker run ubuntu starts a container based on Ubuntu.
+   Often used flags include:
+   - -it: interactive mode with a pseudo-TTY (e.g., docker run -it ubuntu)
+   - -d: run container in detached mode (in background)
+   - --name <container-name>: assign a specific name to the container
+   - -p <host-port>:<container-port>: map container ports to the host
+
+7. docker ps
+   Lists currently running containers (processes).
+   Use docker ps -a to see all containers, including stopped ones.
+
+8. docker stop <container-id or container-name>
+   Stops a running container gracefully.
+   It sends a SIGTERM, then a SIGKILL after a grace period.
+
+9. docker rm <container-id or container-name>
+   Removes a container. The container must be stopped (use docker stop first)
+   or remove it forcefully with docker rm -f.
+
+10. docker rmi <image-id or image-name>
+   Removes an image from the local Docker repository.
+   You can also prune unused images with docker image prune.
+
+11. docker exec <container-id or container-name> <command>
+   Runs a command inside an already running container.
+   Example: docker exec -it my-container /bin/bash gives you a shell in that container.
+
+12. docker build -t <image-name>:<tag> <path>
+   Builds a Docker image from a Dockerfile in the specified path.
+   Example: docker build -t my-app:v1.0 . (using current directory).
+
+13. docker commit <container-id> <new-image-name>:<tag>
+   Creates a new image from a container’s changes.
+   This is less common in production but can be useful for quick prototyping.
+
+14. docker logs <container-id or container-name>
+   Fetches and displays logs from a running (or stopped) container.
+   With -f, you can follow the log output in real time.
+
+15. docker tag <source-image>:<tag> <target-image>:<tag>
+   Creates a new tag for an image, effectively copying the image reference.
+   Usually used before pushing to a registry.
+
+16. docker push <image-name>:<tag>
+   Uploads an image to a Docker registry (like Docker Hub or a private registry).
+   You must be logged in (docker login) and the image name should match your repository name.
+
+17. docker-compose up
+   With a docker-compose.yml file in the current directory, this command starts multiple services
+   as defined in the YAML. Use -d to run them in detached mode.
+   docker-compose down stops and removes containers and networks.
+
+18. docker network ls
+   Lists the Docker networks on your system.
+   By default, Docker creates 'bridge', 'host', and 'none' networks.
+
+19. docker network create <network-name>
+   Creates a user-defined network which allows containers to communicate with each other
+   by container name, simplifying service discovery.
+
+20. docker volume ls
+   Shows created Docker volumes. Volumes provide persistent storage for containers.
+
+21. docker volume create <volume-name>
+   Creates a new volume for data storage.
+   Then you can attach it to containers with the -v or --mount flag.
+
+22. Dockerfile Basics
+   A typical Dockerfile includes:
+     FROM <base-image>
+     RUN <commands>
+     COPY <source> <destination>
+     EXPOSE <port>
+     CMD [ "executable" ]
+   Each instruction creates a new layer in the image.
+
+23. Best Practices
+   - Use official base images or minimal images (like Alpine) where possible.
+   - Keep Dockerfiles small and avoid adding unnecessary packages.
+   - Use .dockerignore to exclude files/folders not needed in the build context.
+   - Tag images consistently (e.g., :latest, :v1.0).
+   - Leverage docker-compose or Kubernetes for multi-container applications.
+
+24. docker container prune
+   Removes all stopped containers.
+   A similar command, docker system prune, cleans up images, containers, volumes, and networks not in use.
+
+25. docker inspect <object>
+   Displays detailed information (in JSON) about Docker objects: containers, images, volumes, and networks.
+   Example: docker inspect <container-id>
+
+26. docker rename <old-name> <new-name>
+   Renames a container without requiring a new build or run.
+
+27. docker login
+   Authenticates you to a Docker registry.
+   Example: docker login -u <username> -p <password>
+   Typically used for Docker Hub or private registries.
+
+28. docker buildx
+   Docker Buildx extends the docker build command, providing the ability to build multi-architecture images.
+   Useful if you need images running on ARM and x86_64.
+
+29. docker context
+   Allows you to switch between multiple Docker “contexts” (e.g., local Docker vs. remote Docker daemon).
+   Example: docker context create <name> --docker "host=ssh://remote-host"
+
+30. Container Security Tips
+   - Run containers as non-root users whenever possible.
+   - Keep your base images up-to-date with security patches.
+   - Use Docker Bench for Security to analyze your Docker host configuration.
+
+Overall, Docker simplifies packaging and distributing applications, ensuring they run in a predictable environment. By learning these commands and following best practices, you can streamline your development, testing, and deployment processes.

@@ -1,0 +1,108 @@
+Git is a distributed version control system that allows developers to track changes in their projects and collaborate effectively. Below is a list of important Git commands, along with brief explanations:
+
+1. git init
+   Initializes a new Git repository in the current directory. This command creates a hidden .git folder that tracks all versioning information.
+
+2. git clone <repository-url>
+   Clones an existing remote repository to your local machine, creating a local copy of the project.
+
+3. git status
+   Displays the state of the working directory and staging area, showing which changes have been staged, which are not staged, and which files are not being tracked.
+
+4. git add <file> or git add .
+   Adds changes in the specified file(s) or all modified files (if using ".") to the staging area, preparing them to be committed.
+
+5. git commit -m "<message>"
+   Records the staged changes in the repository’s history, along with a descriptive message of what was changed.
+
+6. git branch
+   Lists existing branches. When used with an additional parameter (e.g. git branch <branch-name>), it creates a new branch.
+
+7. git checkout <branch-name>
+   Switches to the specified branch. If the branch does not exist locally but exists remotely, you can track it with git checkout -b <branch-name> origin/<branch-name>.
+
+8. git merge <branch-name>
+   Merges the specified branch into the current active branch. The merge can create a new commit that combines the histories of both branches.
+
+9. git pull
+   Fetches and merges changes from the remote repository into the current branch. Typically used to synchronize your local branch with the latest changes from the remote.
+
+10. git push
+   Uploads local changes (commits) to a remote repository. You generally specify a remote name (e.g. origin) and branch name.
+
+11. git remote add <name> <url>
+   Adds a new remote repository reference with the given name and URL. For example, git remote add origin <repository-url>.
+
+12. git diff
+   Shows the differences between commits, commit and working tree, etc. Without arguments, compares the working directory to the staging area.
+
+13. git log
+   Displays a log of commits, starting with the most recent. Various flags can be used to show logs in different formats or filter commits.
+
+14. git revert <commit-hash>
+   Creates a new commit that undoes the changes introduced by the specified commit, without altering commit history.
+
+15. git reset <commit-hash>
+   Moves the current branch pointer to the specified commit. It has multiple modes (soft, mixed, hard) that control how changes are staged or undone in the working directory.
+
+16. git stash
+   Temporarily saves (stashes) your modified files and cleans your working directory. Later, you can restore the stashed changes with git stash pop.
+
+17. git stash pop
+   Restores the most recently stashed changes back into your working directory and removes the stash from the list of stashes.
+
+18. git stash list
+   Shows a list of all currently stashed changes.
+
+19. git tag <tag-name>
+   Creates a new tag (like a label) at the current commit. Useful for marking releases or significant points in the project’s history.
+
+20. git fetch
+   Retrieves the latest commits and branches from the remote repository but does not merge them into your current branch. You can see the updates but your local branches are unchanged until you merge or rebase.
+
+21. git rebase <branch-name>
+   Re-applies commits from the current branch on top of the specified branch. Often used to create a linear project history by “moving” your commits to the tip of another branch.
+
+22. git cherry-pick <commit-hash>
+   Applies the changes of a specific commit to the current branch. This is useful when you want to copy individual commits from one branch to another without merging the entire branch.
+
+23. git reflog
+   Shows a log of all references and HEAD changes (including commits that might not show up in a normal git log if they are orphaned).
+
+24. git submodule add <repo-url> <path>
+   Adds another Git repository as a submodule within the current repository. Useful for including external libraries or shared components.
+
+25. git rm <file>
+   Removes files from both the working directory and the staging area. You can then commit the removal. This is similar to removing the file and then using git add to stage that removal.
+
+26. git mv <old-file> <new-file>
+   Moves or renames a file, and stages the move for the next commit.
+
+27. git commit --amend
+   Modifies the most recent commit. Can be used to correct the commit message or include changes that were missed in the previous commit.
+
+28. git branch -d <branch-name>
+   Deletes the specified branch if it has already been merged. Use -D (uppercase) to force-delete a branch that has not been merged.
+
+29. git config --global user.name "<Name>"
+   Sets the username (globally, if using --global) that appears in your commits. Similarly, git config --global user.email "<email>" sets the email.
+
+30. git blame <file>
+   Shows which commit last modified each line of a file, and who made those changes.
+
+31. git shortlog
+   Summarizes git log in a more concise format grouped by author. Add -s -n to show a numeric count of commits per author.
+
+32. git show <commit-hash>
+   Displays the changes (diff) introduced by a specific commit or tag, as well as metadata about that commit.
+
+33. git grep "<pattern>"
+   Searches for lines matching the given pattern in tracked files.
+
+34. git bisect
+   Helps you find the commit that introduced a bug by performing a binary search through the project’s history.
+
+35. git clean -f
+   Removes untracked files from the working tree. Add the -d flag to also remove untracked directories, and use carefully!
+
+Overall, Git provides a powerful framework for version control and collaboration. Understanding these commands allows teams to efficiently manage and track changes in software projects.

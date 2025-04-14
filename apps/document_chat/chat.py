@@ -5,18 +5,13 @@ from apps.document_chat.helper import DocumentIngestorHelper
 
 class DocumentChatApp:
     """
-    A Streamlit application class for searching local documents with streaming output.
-    This demo shows how to display partial/incremental output (simulated streaming) from the retrieval results.
+    Searching local docs.
     """
     def __init__(
             self,
             data_folder: str = "data",
             db_path: str = "./chroma_db",
     ):
-        """
-        data_folder: folder with .txt/.md files.
-        db_path: folder where ChromaDB is stored.
-        """
         self.title = "Document Chat"
         self.description = "Search local docs (RAG) with Chroma and display results incrementally."
         self.ingestor = DocumentIngestorHelper(
@@ -29,7 +24,7 @@ class DocumentChatApp:
         st.write(self.description)
 
         user_input = st.text_input("Input:", value="")
-        if st.button("Send (Document Chat)"):
+        if st.button("Send"):
             if user_input.strip():
                 try:
                     vectorstore = self.ingestor.load_vectorstore()

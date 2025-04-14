@@ -6,8 +6,7 @@ from apps.flow_chat.helper import FlowGraphHelper
 
 class FlowChatApp:
     """
-    A minimal Streamlit UI for the Flow Chat.
-    All the heavy lifting (graph building, compilation, and invocation) is encapsulated in FlowGraphHelper.
+    Flow chat app.
     """
     def __init__(self):
         self.title = "LangGraph Flow Chat"
@@ -21,7 +20,7 @@ class FlowChatApp:
         st.title(self.title)
         st.write(self.description)
         user_input = st.text_input("Enter your message:")
-        if st.button("Send (Flow Chat with Streaming)"):
+        if st.button("Send"):
             if user_input.strip():
                 try:
 

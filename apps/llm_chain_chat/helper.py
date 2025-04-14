@@ -10,8 +10,7 @@ from streming import StreamlitStreamingCallback
 
 class LLMChainHelper:
     """
-    LLMChainLogic encapsulates the logic for a prompt-based LLM chain with streaming output.
-    It constructs a chain using a PromptTemplate and a streaming-capable ChatOpenAI.
+    LLM Chain Helper.
     """
 
     def __init__(self):
@@ -23,16 +22,15 @@ class LLMChainHelper:
     def invoke_streaming(
             self,
             user_query: str,
-            output_container:
-            st.delta_generator.DeltaGenerator
+            output_container: st.delta_generator.DeltaGenerator,
     ) -> str:
         """
-        Invokes the LLM chain in streaming mode, updating the provided Streamlit container
-        as tokens are generated. Returns the final response.
+        Invokes the LLM chain in streaming mode.
         """
 
-        streaming_callback = StreamlitStreamingCallback(output_container)
-
+        streaming_callback = StreamlitStreamingCallback(
+            output_container,
+        )
 
         streaming_llm = ChatOpenAI(
             model="gpt-4o",

@@ -7,16 +7,20 @@ from langchain.vectorstores import Chroma
 class DocumentIngestorHelper:
     """
     Loads, splits documents, and stores them in a local Chroma vector DB.
-    Also provides methods to load the vector store for querying.
     """
-    def __init__(self, data_folder: str, persist_directory: str = "./chroma_db", collection_name: str = "my_documents"):
+    def __init__(
+            self,
+            data_folder: str,
+            persist_directory: str = "./chroma_db",
+            collection_name: str = "my_documents",
+    ):
         self.data_folder = data_folder
         self.persist_directory = persist_directory
         self.collection_name = collection_name
 
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=300,
-            chunk_overlap=50
+            chunk_overlap=50,
         )
         self.embeddings = OpenAIEmbeddings()
         self.vectorstore = None
@@ -29,15 +33,31 @@ class DocumentIngestorHelper:
         docs = []
         for file_name in os.listdir(self.data_folder):
             if file_name.endswith((".txt", ".md")):
-                with open(os.path.join(self.data_folder, file_name), "r", encoding="utf-8") as f:
+                with open(
+                        os.path.join(
+                            self.data_folder, file_name
+                        ), "r", encoding="utf-8",
+                ) as f:
                     text = f.read()
-                docs.append(Document(page_content=text, metadata={"source": file_name}))
+                docs.append(
+                    Document(
+                        page_content=text,
+                        metadata={"source": file_name},
+                    )
+                )
 
         splitted_docs = []
         for doc in docs:
-            chunks = self.text_splitter.split_text(doc.page_content)
+            chunks = self.text_splitter.split_text(
+                doc.page_content,
+            )
             for chunk in chunks:
-                splitted_docs.append(Document(page_content=chunk, metadata=doc.metadata))
+                splitted_docs.append(
+                    Document(
+                        page_content=chunk,
+                        metadata=doc.metadata,
+                    )
+                )
 
         self.vectorstore = Chroma.from_documents(
             splitted_docs,

@@ -8,7 +8,7 @@ dotenv.load_dotenv()
 
 class LLMChainChatApp:
     """
-    A Streamlit-based UI for the LLMChain logic.
+    LLM Chain chat app.
     """
 
     def __init__(self):
@@ -24,7 +24,7 @@ class LLMChainChatApp:
         st.write(self.description)
 
         user_query = st.text_input("Your query for the LLM:", value="")
-        if st.button("Send (Streaming)"):
+        if st.button("Send"):
             if user_query.strip():
 
                 output_container = st.empty()

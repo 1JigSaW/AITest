@@ -8,7 +8,7 @@ from streming import StreamlitStreamingCallback
 
 class MemoryChatHelper:
     """
-    Encapsulates the logic for a memory-based chat with streaming output.
+    Memory Chain chat.
     """
 
     def __init__(self):
@@ -38,7 +38,7 @@ class MemoryChatHelper:
             model_name=self.llm_model,
             temperature=self.temperature,
             streaming=True,
-            callbacks=[streaming_callback]
+            callbacks=[streaming_callback],
         )
 
 

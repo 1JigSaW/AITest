@@ -7,7 +7,7 @@ dotenv.load_dotenv()
 
 class MemoryChatApp:
     """
-    MemoryChatApp provides a simple Streamlit UI for the memory chat.
+    Memory chat app.
     """
     def __init__(self):
         self.title = "Memory Chat"
@@ -21,11 +21,14 @@ class MemoryChatApp:
         st.title(self.title)
         st.write(self.description)
         user_message = st.text_input("You:", value="")
-        if st.button("Send (Memory Chat with Streaming)"):
+        if st.button("Send"):
             if user_message.strip():
                 output_container = st.empty()
                 output_container.text("")
-                final_response = self.logic.invoke_streaming(user_message, output_container)
+                final_response = self.logic.invoke_streaming(
+                    user_message,
+                    output_container,
+                )
                 st.write("**Final Response:**", final_response)
             else:
                 st.info("Please enter a message.")
